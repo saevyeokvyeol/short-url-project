@@ -25,7 +25,7 @@ public class Url {
     private String destinationUrl;
 
     @NonNull
-    private long totalClick = 0;
+    private long totalClick;
 
     @NonNull
     private String password;
@@ -39,14 +39,6 @@ public class Url {
     @OneToMany(mappedBy = "url")
     @JsonIgnore
     private List<AccessLog> accessLogList;
-
-    /**
-     * short url 만들기
-     * : 알파벳 대소문자와 숫자로 이루어진 7자리의 short url을 생성해 shortUrl 필드에 입력
-     * */
-    public void createShortUrl() {
-
-    }
 
     /**
      * 조회수 카운트
