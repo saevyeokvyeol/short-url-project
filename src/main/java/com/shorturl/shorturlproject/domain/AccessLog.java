@@ -29,7 +29,6 @@ public class AccessLog {
     private LocalDateTime AccessLogCreateDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "short_url")
     @JsonIgnore
     private Url url;
 }

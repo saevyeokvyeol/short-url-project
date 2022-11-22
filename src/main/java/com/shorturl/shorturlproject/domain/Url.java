@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Url {
     @UpdateTimestamp
     private LocalDateTime lastClickDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "url")
     @JsonIgnore
     private List<AccessLog> accessLogList;
 
