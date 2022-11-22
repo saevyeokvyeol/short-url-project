@@ -14,8 +14,10 @@ public interface ShortService {
 
     /**
      * AccessLog 생성 및 Url 조회수 증가
-     * : 1. A
      * : short url을 이용해 원본 url로 이동할 때 메소드 호출
+     *   1. AccessLog 생성
+     *   2. url 조회수 증가
+     *   3. url 리턴
      *
      * @param: AccessLog accessLog(ip, userAgent, referrer, url(shortUrl))
      * @return: Url url(Url의 destinationUrl을 이용해 redirect시키기 위해 리턴)
