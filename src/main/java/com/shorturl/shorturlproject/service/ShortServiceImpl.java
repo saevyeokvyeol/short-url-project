@@ -22,7 +22,7 @@ public class ShortServiceImpl implements ShortService{
      * : url 생성 시 url 내부 메소드 호출해 short url 생성
      *
      * @param: UrlRequestDto urlRequestDto
-     * @return: UrlResponseDto
+     * @return: String
      */
     @Override
     public String createUrl(UrlRequestDto urlRequestDto) {
@@ -49,6 +49,7 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public Url clickShortUrl(AccessLog accessLog) {
+
         return null;
     }
 

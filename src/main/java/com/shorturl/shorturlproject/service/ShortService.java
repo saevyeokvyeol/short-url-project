@@ -10,7 +10,7 @@ public interface ShortService {
      * : url 생성 시 url 내부 메소드 호출해 short url 생성
      *
      * @param: UrlRequestDto urlRequestDto
-     * @return: UrlResponseDto
+     * @return: String
      */
     String createUrl(UrlRequestDto urlRequestDto);
 
