@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${path}/js/index.js"></script>
     <title>Pluto Backend Assignment</title>
 </head>
 
@@ -20,9 +22,13 @@
     <h1>Short URL Generator</h1>
 </header>
 <main>
-    <div class="input-title">Destination URL</div>
-    <input class="url-input" placeholder="https://www.scinapse.io/" />
-    <button class="url-button">Create Short URL</button>
+    <div class="input-box">
+        <div class="input-title">Destination URL</div>
+        <input class="url-input" id="destinationUrl" placeholder="https://www.scinapse.io/" />
+        <div class="input-title">Password</div>
+        <input class="url-input" id="password" type="password" />
+    </div>
+    <button class="url-button" id="btn-save">Create Short URL</button>
 </main>
 </body>
 </html>
