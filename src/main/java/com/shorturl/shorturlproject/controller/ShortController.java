@@ -17,8 +17,8 @@ public class ShortController {
      * @param: Url url(shortUrl, password)
      * @return: String(생성한 shortUrl을 이용해 디테일 페이지로 리다이렉트)
      * */
-    @PostMapping("/create-url")
-    public UrlRequestDto createUrl(UrlRequestDto url) {
-        return null;
+    @PostMapping("/url")
+    public String createUrl(@RequestBody UrlRequestDto urlRequestDto) {
+        return shortService.createUrl(urlRequestDto);
     }
 }

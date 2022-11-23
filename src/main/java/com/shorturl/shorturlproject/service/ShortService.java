@@ -2,15 +2,17 @@ package com.shorturl.shorturlproject.service;
 
 import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
+import com.shorturl.shorturlproject.dto.UrlRequestDto;
 
 public interface ShortService {
     /**
      * Url 생성
      * : url 생성 시 url 내부 메소드 호출해 short url 생성
      *
-     * @param: Url url(destinationUrl, password)
-     * */
-    void createUrl(Url url);
+     * @param: UrlRequestDto urlRequestDto
+     * @return: UrlResponseDto
+     */
+    String createUrl(UrlRequestDto urlRequestDto);
 
     /**
      * AccessLog 생성 및 Url 조회수 증가
