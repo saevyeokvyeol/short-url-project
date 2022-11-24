@@ -29,6 +29,7 @@
         <input class="url-input" id="password" type="password" />
     </div>
     <button class="url-button" id="btn-save">Create Short URL</button>
+    <a href="${path}/LTLiprS">이동</a>
 </main>
 </body>
 </html>

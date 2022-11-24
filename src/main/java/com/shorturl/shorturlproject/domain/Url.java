@@ -45,6 +45,6 @@ public class Url {
      * : 조회수 필드인 totalClick를 1씩 카운트
      * */
     public void plusTotalClick() {
-
+        this.totalClick++;
     }
 }

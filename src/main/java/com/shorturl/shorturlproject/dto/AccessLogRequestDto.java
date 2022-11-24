@@ -17,12 +17,14 @@ public class AccessLogRequestDto {
     private String ip;
     private String userAgent;
     private String referrer;
+    private String shortUrl;
     private Url url;
 
-    public AccessLogRequestDto(String ip, String userAgent, String referrer) {
+    public AccessLogRequestDto(String ip, String userAgent, String referrer, String shortUrl) {
         this.ip = ip;
         this.userAgent = userAgent;
         this.referrer = referrer;
+        this.shortUrl = shortUrl;
     }
 
     public AccessLog toEntity() {

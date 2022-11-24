@@ -2,7 +2,9 @@ package com.shorturl.shorturlproject.service;
 
 import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
+import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 import com.shorturl.shorturlproject.repository.AccessLogRepository;
 import com.shorturl.shorturlproject.repository.UrlRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,16 +43,22 @@ public class ShortServiceImpl implements ShortService{
      * : short url을 이용해 원본 url로 이동할 때 메소드 호출
      *   1. AccessLog 생성
      *   2. url 조회수 증가
-     *   3. url 리턴
+     *   3. String 리턴
      *
-     * @param accessLog
-     * @param: AccessLog accessLog(ip, userAgent, referrer, url(shortUrl))
-     * @return: Url url(Url의 destinationUrl을 이용해 redirect시키기 위해 리턴)
+     * @param: AccessLogRequestDto accessLogRequestDto
+     * @return: String(Url의 destinationUrl을 이용해 redirect시키기 위해 destinationUrl 리턴)
      */
     @Override
-    public Url clickShortUrl(AccessLog accessLog) {
+    public String clickShortUrl(AccessLogRequestDto accessLogRequestDto) throws UrlNotFoundException {
+        System.out.println(accessLogRequestDto.getShortUrl());
+        Url url = urlRepository.findById(accessLogRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
 
-        return null;
+        accessLogRequestDto.insertUrl(url);
+        AccessLog accessLog = accessLogRepository.save(accessLogRequestDto.toEntity());
+
+        url.plusTotalClick();
+
+        return url.getDestinationUrl();
     }
 
     /**

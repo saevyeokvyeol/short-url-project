@@ -1,11 +1,16 @@
 package com.shorturl.shorturlproject.controller;
 
+import com.shorturl.shorturlproject.domain.AccessLog;
+import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
+import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 import com.shorturl.shorturlproject.service.ShortService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
@@ -29,8 +34,40 @@ public class IndexController {
      * @return: String(파라미터로 받아온 shortUrl로 검색한 원본 url로 리다이렉트)
      * */
     @GetMapping("/{shortUrl}")
-    public String redirectShortUrl(@PathVariable String shortUrl) {
-        return "error";
+    public String redirectShortUrl(@PathVariable String shortUrl, HttpServletRequest request) throws UrlNotFoundException {
+        String ip = this.getClientIp(request);
+        String userAgent = request.getHeader("user-agent");
+        String referrer = request.getHeader("Referer");
+
+        AccessLogRequestDto accessLogRequestDto = AccessLogRequestDto.builder()
+                .ip(ip)
+                .userAgent(userAgent)
+                .referrer(referrer)
+                .shortUrl(shortUrl)
+                .build();
+
+        return "redirect:" + shortService.clickShortUrl(accessLogRequestDto);
+    }
+
+    /**
+     * 클라이언트 ip 가져오기
+     *
+     * @param: HttpServletRequest request(클라이언트 ip를 가져올 HttpServletRequest 입력)
+     * @return: String(가져온 ip 리턴)
+     * */
+    private String getClientIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("Proxy-Client-IP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("WL-Proxy-Client-IP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("HTTP_CLIENT_IP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("X-Real-IP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("X-RealIP");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getHeader("REMOTE_ADDR");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) ip = request.getRemoteAddr();
+
+        return ip;
     }
 
     /**

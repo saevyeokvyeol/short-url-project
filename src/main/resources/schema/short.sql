@@ -1,0 +1,1 @@
+insert into url(short_url, destination_url, last_click_date, password, total_click, url_create_date) values('aaaaaaa', 'http://www.naver.com', 22/11/23 16:04:17.310516000	0000, 0, 22/11/23 16:04:17.310516000);

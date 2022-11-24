@@ -2,7 +2,9 @@ package com.shorturl.shorturlproject.service;
 
 import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
+import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 
 public interface ShortService {
     /**
@@ -19,12 +21,12 @@ public interface ShortService {
      * : short url을 이용해 원본 url로 이동할 때 메소드 호출
      *   1. AccessLog 생성
      *   2. url 조회수 증가
-     *   3. url 리턴
+     *   3. String 리턴
      *
-     * @param: AccessLog accessLog(ip, userAgent, referrer, url(shortUrl))
-     * @return: Url url(Url의 destinationUrl을 이용해 redirect시키기 위해 리턴)
+     * @param: AccessLogRequestDto accessLogRequestDto
+     * @return: String(Url의 destinationUrl을 이용해 redirect시키기 위해 destinationUrl 리턴)
      * */
-    Url clickShortUrl(AccessLog accessLog);
+    String clickShortUrl(AccessLogRequestDto accessLogRequestDto) throws UrlNotFoundException;
 
     /**
      * id를 이용해 Url 가져오기
