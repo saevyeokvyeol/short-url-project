@@ -2,15 +2,18 @@ package com.shorturl.shorturlproject.controller;
 
 import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
+import com.shorturl.shorturlproject.dto.UrlResponseDto;
 import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 import com.shorturl.shorturlproject.service.ShortService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,7 +37,8 @@ public class IndexController {
      * @return: String(파라미터로 받아온 shortUrl로 검색한 원본 url로 리다이렉트)
      * */
     @GetMapping("/{shortUrl}")
-    public String redirectShortUrl(@PathVariable String shortUrl, HttpServletRequest request) throws UrlNotFoundException {
+    public String redirectShortUrl(@PathVariable("shortUrl") String shortUrl, HttpServletRequest request) throws UrlNotFoundException {
+        System.out.println(shortUrl);
         String ip = this.getClientIp(request);
         String userAgent = request.getHeader("user-agent");
         String referrer = request.getHeader("Referer");
@@ -78,7 +82,9 @@ public class IndexController {
      * @return: String(detail.jsp로 이동)
      * */
     @GetMapping("/{shortUrl}/detail")
-    public String detailUrl(@PathVariable String shortUrl) {
+    public String detailUrl(@PathVariable("shortUrl") String shortUrl, Model model) throws UrlNotFoundException {
+        UrlResponseDto urlResponseDto = shortService.detailUrl(shortUrl);
+        model.addAttribute("url", urlResponseDto);
         return "detail";
     }
 }

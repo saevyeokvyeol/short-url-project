@@ -4,6 +4,7 @@ import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
 import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.dto.UrlResponseDto;
 import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 import com.shorturl.shorturlproject.repository.AccessLogRepository;
 import com.shorturl.shorturlproject.repository.UrlRepository;
@@ -50,7 +51,7 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public String clickShortUrl(AccessLogRequestDto accessLogRequestDto) throws UrlNotFoundException {
-        System.out.println(accessLogRequestDto.getShortUrl());
+        System.out.println("뭐가 나오나: " + accessLogRequestDto.getShortUrl());
         Url url = urlRepository.findById(accessLogRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
 
         accessLogRequestDto.insertUrl(url);
@@ -65,11 +66,12 @@ public class ShortServiceImpl implements ShortService{
      * id를 이용해 Url 가져오기
      * : short url 상세 정보를 조회하기 위해 메소드 호출
      *
-     * @param: Url url(shortUrl, password)
-     * @return: Url url
+     * @param: String shortUrl
+     * @return: UrlResponseDto urlResponseDto
      */
     @Override
-    public Url detailUrl(Url url) {
-        return null;
+    public UrlResponseDto detailUrl(String shortUrl) throws UrlNotFoundException {
+        Url url = urlRepository.findById(shortUrl).orElseThrow(() -> new UrlNotFoundException());
+        return new UrlResponseDto(url);
     }
 }

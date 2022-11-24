@@ -31,23 +31,23 @@
             <tbody>
             <tr>
                 <td>Destination URL</td>
-                <td>https://www.scinapse.io/</td>
+                <td>${url.destinationUrl}</td>
             </tr>
             <tr>
                 <td>Short URL</td>
-                <td>http://localhost:8080/short</td>
+                <td><a href="${path}/${url.shortUrl}">http://localhost:8888/${url.shortUrl}</a></td>
             </tr>
             <tr>
                 <td>Created At</td>
-                <td>2022-11-16T06:37:28.105Z</td>
+                <td>${url.urlCreateDate}</td>
             </tr>
             <tr>
                 <td>Total Clicks</td>
-                <td>777</td>
+                <td>${url.totalClick}</td>
             </tr>
             <tr>
                 <td>Last Clicked At</td>
-                <td>2022-11-16T06:37:28.105Z</td>
+                <td>${url.lastClickDate}</td>
             </tr>
             </tbody>
         </table>
@@ -64,66 +64,14 @@
                 <th>Clicked At</th>
             </thead>
             <tbody>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
-            <tr>
-                <td>192.168.0.1</td>
-                <td>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36</td>
-                <td>https://www.scinapse.io/</td>
-                <td>2022-11-16T06:37:28.105Z</td>
-            </tr>
+            <c:forEach items="${url.accessLogList}" var="accessLog">
+                <tr>
+                    <td>${accessLog.ip}</td>
+                    <td>${accessLog.userAgent}</td>
+                    <td>${accessLog.referrer}1</td>
+                    <td>${accessLog.accessLogCreateDate}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

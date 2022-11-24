@@ -17,7 +17,6 @@ public class UrlResponseDto {
     private String shortUrl;
     private String destinationUrl;
     private long totalClick;
-    private String password;
     private LocalDateTime urlCreateDate;
     private LocalDateTime lastClickDate;
     private List<AccessLogResponseDto> accessLogList;

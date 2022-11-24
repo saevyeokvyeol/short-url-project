@@ -26,7 +26,7 @@ public class AccessLog {
     private String referrer;
 
     @CreationTimestamp
-    private LocalDateTime AccessLogCreateDate;
+    private LocalDateTime accessLogCreateDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore

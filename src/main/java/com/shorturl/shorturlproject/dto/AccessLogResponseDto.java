@@ -17,13 +17,13 @@ public class AccessLogResponseDto {
     private String ip;
     private String userAgent;
     private String referrer;
-    private LocalDateTime AccessLogCreateDate;
-    private UrlRequestDto url;
+    private LocalDateTime accessLogCreateDate;
 
     public AccessLogResponseDto(AccessLog entity) {
         this.accessLogId = entity.getAccessLogId();
         this.ip = entity.getIp();
         this.userAgent = entity.getUserAgent();
-        this.AccessLogCreateDate = entity.getAccessLogCreateDate();
+        this.referrer = entity.getReferrer();
+        this.accessLogCreateDate = entity.getAccessLogCreateDate();
     }
 }

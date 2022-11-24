@@ -4,6 +4,7 @@ import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
 import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.dto.UrlResponseDto;
 import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 
 public interface ShortService {
@@ -32,8 +33,8 @@ public interface ShortService {
      * id를 이용해 Url 가져오기
      * : short url 상세 정보를 조회하기 위해 메소드 호출
      *
-     * @param: Url url(shortUrl, password)
-     * @return: Url url
-     * */
-    Url detailUrl(Url url);
+     * @param: String shortUrl
+     * @return: UrlResponseDto urlResponseDto
+     */
+    public UrlResponseDto detailUrl(String shortUrl) throws UrlNotFoundException;
 }
