@@ -64,14 +64,23 @@
                 <th>Clicked At</th>
             </thead>
             <tbody>
-            <c:forEach items="${url.accessLogList}" var="accessLog">
-                <tr>
-                    <td>${accessLog.ip}</td>
-                    <td>${accessLog.userAgent}</td>
-                    <td>${accessLog.referrer}1</td>
-                    <td>${accessLog.accessLogCreateDate}</td>
-                </tr>
-            </c:forEach>
+            <c:choose>
+                <c:when test="${url.accessLogList.size() == 0}">
+                    <tr>
+                        <td colspan="4" class="no-data-td">No Data</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${url.accessLogList}" var="accessLog">
+                        <tr>
+                            <td>${accessLog.ip}</td>
+                            <td>${accessLog.userAgent}</td>
+                            <td>${accessLog.referrer}</td>
+                            <td>${accessLog.accessLogCreateDate}</td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
             </tbody>
         </table>
     </div>
