@@ -4,7 +4,9 @@ import com.shorturl.shorturlproject.domain.AccessLog;
 import com.shorturl.shorturlproject.domain.Url;
 import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.dto.UrlDetailResponseDto;
 import com.shorturl.shorturlproject.dto.UrlResponseDto;
+import com.shorturl.shorturlproject.exception.InvalidLoginInformationException;
 import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 import com.shorturl.shorturlproject.repository.AccessLogRepository;
 import com.shorturl.shorturlproject.repository.UrlRepository;
@@ -51,7 +53,6 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public String clickShortUrl(AccessLogRequestDto accessLogRequestDto) throws UrlNotFoundException {
-        System.out.println("뭐가 나오나: " + accessLogRequestDto.getShortUrl());
         Url url = urlRepository.findById(accessLogRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
 
         accessLogRequestDto.insertUrl(url);
@@ -70,8 +71,22 @@ public class ShortServiceImpl implements ShortService{
      * @return: UrlResponseDto urlResponseDto
      */
     @Override
-    public UrlResponseDto detailUrl(String shortUrl) throws UrlNotFoundException {
+    public UrlDetailResponseDto detailUrl(String shortUrl) throws UrlNotFoundException {
         Url url = urlRepository.findById(shortUrl).orElseThrow(() -> new UrlNotFoundException());
+        return new UrlDetailResponseDto(url);
+    }
+
+    /**
+     * 인증
+     * : DB에서 shortUrl과 password가 동일한 레코드를 검색
+     *
+     * @param: UrlRequestDto urlRequestDto
+     * @return: UrlResponseDto urlResponseDto
+     */
+    @Override
+    public UrlResponseDto authenticateUrl(UrlRequestDto urlRequestDto) throws InvalidLoginInformationException, UrlNotFoundException {
+        Url url = urlRepository.findById(urlRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
+        if (!url.getPassword().equals(urlRequestDto.getPassword())) new InvalidLoginInformationException();
         return new UrlResponseDto(url);
     }
 }

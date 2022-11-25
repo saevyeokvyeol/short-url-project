@@ -1,10 +1,10 @@
 package com.shorturl.shorturlproject.service;
 
-import com.shorturl.shorturlproject.domain.AccessLog;
-import com.shorturl.shorturlproject.domain.Url;
 import com.shorturl.shorturlproject.dto.AccessLogRequestDto;
 import com.shorturl.shorturlproject.dto.UrlRequestDto;
+import com.shorturl.shorturlproject.dto.UrlDetailResponseDto;
 import com.shorturl.shorturlproject.dto.UrlResponseDto;
+import com.shorturl.shorturlproject.exception.InvalidLoginInformationException;
 import com.shorturl.shorturlproject.exception.UrlNotFoundException;
 
 public interface ShortService {
@@ -36,5 +36,14 @@ public interface ShortService {
      * @param: String shortUrl
      * @return: UrlResponseDto urlResponseDto
      */
-    public UrlResponseDto detailUrl(String shortUrl) throws UrlNotFoundException;
+    UrlDetailResponseDto detailUrl(String shortUrl) throws UrlNotFoundException;
+
+    /**
+     * 인증
+     * : DB에서 shortUrl과 password가 동일한 레코드를 검색
+     *
+     * @param: UrlRequestDto urlRequestDto
+     * @return: UrlResponseDto urlResponseDto
+     * */
+    UrlResponseDto authenticateUrl(UrlRequestDto urlRequestDto) throws InvalidLoginInformationException, UrlNotFoundException;
 }
