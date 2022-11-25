@@ -24,12 +24,11 @@
 <main>
     <div class="input-box">
         <div class="input-title">Destination URL</div>
-        <input class="url-input" id="destinationUrl" placeholder="https://www.scinapse.io/" />
+        <input class="url-input" id="destinationUrl" value="https://" />
         <div class="input-title">Password</div>
         <input class="url-input" id="password" type="password" />
     </div>
     <button class="url-button" id="btn-save">Create Short URL</button>
-    <a href="${path}/LTLiprS">이동</a>
 </main>
 </body>
 </html>
