@@ -53,7 +53,7 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public String clickShortUrl(AccessLogRequestDto accessLogRequestDto) throws UrlNotFoundException {
-        Url url = urlRepository.findById(accessLogRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
+        Url url = urlRepository.findById(accessLogRequestDto.getShortUrl()).orElseThrow(() -> new throw UrlNotFoundException());
 
         accessLogRequestDto.insertUrl(url);
         AccessLog accessLog = accessLogRepository.save(accessLogRequestDto.toEntity());
@@ -72,7 +72,7 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public UrlDetailResponseDto detailUrl(String shortUrl) throws UrlNotFoundException {
-        Url url = urlRepository.findById(shortUrl).orElseThrow(() -> new UrlNotFoundException());
+        Url url = urlRepository.findById(shortUrl).orElseThrow(() -> new throw UrlNotFoundException());
         return new UrlDetailResponseDto(url);
     }
 
@@ -85,8 +85,8 @@ public class ShortServiceImpl implements ShortService{
      */
     @Override
     public UrlResponseDto authenticateUrl(UrlRequestDto urlRequestDto) throws InvalidLoginInformationException, UrlNotFoundException {
-        Url url = urlRepository.findById(urlRequestDto.getShortUrl()).orElseThrow(() -> new UrlNotFoundException());
-        if (!url.getPassword().equals(urlRequestDto.getPassword())) new InvalidLoginInformationException();
+        Url url = urlRepository.findById(urlRequestDto.getShortUrl()).orElseThrow(() -> new throw UrlNotFoundException());
+        if (!url.getPassword().equals(urlRequestDto.getPassword())) new throw InvalidLoginInformationException();
         return new UrlResponseDto(url);
     }
 }
